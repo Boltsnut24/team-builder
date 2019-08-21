@@ -1,44 +1,100 @@
 import React, { useState } from 'react';
 import MemberCard from './MemberCard';
 
-function Form({props}) {
+function Form(props) {
+   const defaultState = [{
+    name: '',
+    email: '',
+    role: '',
+    id: ''
+  }];
+  const data = [
+    {
+        name: 'Jeremy Brady',
+        email: 'jeremy.brady702@gmail.com',
+        role: 'TL',
+        id: 1
+    },
+    {
+        name: 'Benita',
+        email: 'Benita@nomail.com',
+        role: 'student',
+        id: 2
+    },
+    {
+        name: 'Brad',
+        email: 'Brad@nomail.com',
+        role: 'student',
+        id: 3
+    },
+    {
+        name: 'Ian',
+        email: 'Ian@nomail.com',
+        role: 'student',
+        id: 4
+    },
+    {
+        name: 'Julie',
+        email: 'Julie@nomail.com',
+        role: 'student',
+        id: 5
+    },
+    {
+        name: 'Nick',
+        email: 'Nick@nomail.com',
+        role: 'student',
+        id: 6
+    },
+    {
+        name: 'Rebecca',
+        email: 'Rebecca@nomail.com',
+        role: 'student',
+        id: 7
+    },
+    {
+        name: 'Zach',
+        email: 'Zach@nomail.com',
+        role: 'student',
+        id: 8
+    }
+    
+];
+  const[state, setState] = useState(data)
 
-  const changeHandlerName = event => {
-    props.setTeam({ ...props.team, [event.target.name]: event.target.value });
-  };
 
-  const changeHandlerEmail = event => {
-    props.setTeam({ ...props.team, [event.target.email]: event.target.value });
-  };
 
-  const changeHandlerRole = event => {
-    props.setTeam({ ...props.team, [event.target.role]: event.target.value });
-  };
+  function handleChange(event){
+    setState({
+      ...state, 
+      [event.target.name]:event.target.value
+    })
+  }
 
-  const handleSubmit = event => {
+  function handleSubmit(event){
     event.preventDefault();
-    console.log(props.name);
-  };
+    props.setTeam([...props.team, state])
+    setState(defaultState)
+  }
 
   return (
     <div>
-    <form onSubmit={event => handleSubmit(event)}>
+    <form onSubmit={handleSubmit}>
       <label>
         Name:
-        <input type="text" id="name" value={props.team.name} 
-        onChange={changeHandlerName} />
+        <input type="text" id="name" name='name' value={state.name} 
+        onChange={handleChange} />
       </label>
       <label>
         Email:
-        <input type="text" id="email" value={props.team.email} 
-        onChange={changeHandlerEmail} />
+        <input type="text" id="email" name='email' value={state.email} 
+        onChange={handleChange} />
       </label>
       <label>
         Role:
-        <input type="text" id="role" value={props.team.role} 
-        onChange={changeHandlerRole} />
+        <input type="text" id="role" name='role' value={state.role} 
+        onChange={handleChange} />
       </label>
-      <button>Submit!</button>
+      <button type="submit">Submit!</button>
     </form>
   </div>
   )

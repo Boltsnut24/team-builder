@@ -23,7 +23,7 @@ function App() {
           )
         })
       }
-      <Form setTeam={setTeam} team={team} />
+      <Form setTeam={setTeam} team={team}/>
     </div>
   );
 }
